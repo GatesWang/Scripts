@@ -1,7 +1,7 @@
-setTimeout(a, 1000);
-setTimeout(b, 2000);
-setTimeout(c, 3000);
-setTimeout(d, 4000);
+setTimeout(a, 500);
+setTimeout(b, 1000);
+setTimeout(c, 1500);
+setTimeout(d, 2000);
 
 function a(){
     document.getElementById("userNavigationLabel").click();
