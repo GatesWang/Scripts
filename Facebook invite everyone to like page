@@ -1,1 +1,18 @@
 
+setTimeout(a, 500);
+setTimeout(b, 1000);
+
+function a(){
+    var elems = document.body.getElementsByTagName("*");
+    for (var i = 0; i < elems.length; i++) {
+        if(elems[i].innerHTML == "Invite friends to like this Page"){
+            elems[i].click();
+        }
+    }
+}
+function b(){
+    var buttons = document.getElementsByClassName("uiButtonText");
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].click();
+    }
+}
