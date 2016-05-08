@@ -1,9 +1,9 @@
 
 setTimeout(a, 500);
-setTimeout(b, 1000);
+setTimeout(b, 5000);
 
 function a(){
-    var elems = document.body.getElementsByTagName("*");
+    var elems = document.body.getElementsByTagName("div");
     for (var i = 0; i < elems.length; i++) {
         if(elems[i].innerHTML == "Invite friends to like this Page"){
             elems[i].click();
