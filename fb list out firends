@@ -1,0 +1,11 @@
+var ele = document.getElementsByClassName('uiProfileBlockContent');
+str = "";
+
+for(var i=0; i<ele.length; i++){
+	var ele2 = ele[i]
+	var ele3 = ele2.children[0]
+	var ele4 = ele3.children[1]
+	var ele5 = ele4.children[0]
+	var ele6 = ele5.children[0]
+	str += ele6.innerHTML + "|";
+}
