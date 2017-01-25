@@ -1,0 +1,22 @@
+function eventFire(el, etype){
+  if (el.fireEvent) {
+    el.fireEvent('on' + etype);
+  } else {
+    var evObj = document.createEvent('Events');
+    evObj.initEvent(etype, true, false);
+    el.dispatchEvent(evObj);
+  }
+}
+button = document.getElementById('pd-vote-button9644049');
+list = document.getElementsByClassName('pds-answer-span');
+temp = null;
+for(var i=0; i<list.length; i++){
+	if(list[i].innerHTML == "Frank Sun, East Brunswick")
+    	temp = list[i];
+}
+
+window.setInterval(function(){
+window.setTimeout(function(){temp.click();}, 5000);
+window.setTimeout(function(){eventFire(button, 'click');}, 10000);
+window.setTimeout(function(){PDV_go9644049();}, 15000);
+}, 20000);
