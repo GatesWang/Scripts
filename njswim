@@ -17,6 +17,6 @@ for(var i=0; i<list.length; i++){
 
 window.setInterval(function(){
 window.setTimeout(function(){temp.click();}, 1000);
-window.setTimeout(function(){eventFire(button, 'click');}, 8000);
-window.setTimeout(function(){PDV_go9644049();}, 9000);
-}, 10000);
+window.setTimeout(function(){eventFire(button, 'click');}, 4000);
+window.setTimeout(function(){PDV_go9644049();}, 5000);
+}, 8000);
