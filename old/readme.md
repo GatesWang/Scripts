@@ -1,1 +1,2 @@
-These are scripts that I wrote as a kid. 
+# Scripts
+Just random scripts that I write usually javascript or python
