@@ -6,29 +6,70 @@ alias ...="cd ../../.."
 alias ....="cd ../../../.."
 
 #git related stuff
-alias l="git log"
+alias l="git log"	
+alias ll="git log -1 --oneline" #last log
+alias lll="git log -2 --oneline" 
+alias llll="git log -3 --oneline" #last log
+alias lo="git log --oneline"	
+alias lr="git log --reverse"	
+
 alias d="git diff"
-alias a="git add"
-alias a.="git add ."
+alias ds="git diff --staged" # compare stage to head
+alias du="git diff HEAD" $ compare working dir to head
+
+alias a="git add" 
+alias a.c="git add . && git commit"
+alias a.cm="git add . && git commit -m"
+alias au="git add -u" 
+alias ap="git add --patch" #use patch
+alias a.="git add ." #adds everything 
+alias ap.="git add --patch ." #adds everything and use patch
+alias au="echo -e 'a\n*\nq\n'|git add -i >/dev/null && echo 'untracked files added'" #add untracked
+
+alias cl="git clean -xdf" #this discards untracked files
 alias m="git merge"
+
 alias ch="git checkout"
+alias ch.="git checkout ."
+alias chb="git checkout -b"
+alias cht="git checkout --theirs"
+alias ch.o="git checkout --ours"
+function ch.t (){
+	git checkout --theirs $* .
+}
+function cho. (){
+	git checkout --ours $* .
+}
+
 alias br="git branch"
-alias co="git commit"
+alias brd="git branch -d"
+alias brm="git branch -m"
+
+alias c="git commit"
+alias cm="git commit -m"
+alias ca="git commit --amend"
+alias cam="git commit --amend -m"
+
 alias s="git status"
 
-alias rest="git restore --staged" #clears staging area
-alias re="git restore" #this is for clearing the working directory, this discards local changes
+alias res="git restore --staged" #clears staging area
+alias res.="git restore --staged ." #clears staging area
+alias re.="git restore ." #this is for clearing the working directory, this discards local changes
 
 alias st="git stash"
 alias sta="git stash apply"
 alias stai="git stash apply --index"
 alias stl="git stash list"
+alias stc="git stash list"
 
 alias rts="git reset --soft" #wk dir AND index are the same
-alias rtm="git reset --mixed" #default option, wk dir is the same
+alias rts^="git reset --soft HEAD^" #wk dir AND index are the same
+alias rt="git reset --mixed" #default option, wk dir is the same
+alias rt^="git reset --mixed HEAD^" #default option, wk dir is the same
 alias rth="git reset --hard" #empty wk dir
+alias rth^="git reset --hard HEAD^" #empty wk dir
 
-alias cl="git clean" #this discards untracked files
+
 
 #this is for strings
 P="AAA"
