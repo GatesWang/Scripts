@@ -33,11 +33,11 @@ alias ch="git checkout"
 alias ch.="git checkout ."
 alias chb="git checkout -b"
 alias cht="git checkout --theirs"
-alias ch.o="git checkout --ours"
+alias cho="git checkout --ours"
 function ch.t (){
 	git checkout --theirs $* .
 }
-function cho. (){
+function ch.o (){
 	git checkout --ours $* .
 }
 
@@ -69,7 +69,7 @@ alias rt^="git reset --mixed HEAD^" #default option, wk dir is the same
 alias rth="git reset --hard" #empty wk dir
 alias rth^="git reset --hard HEAD^" #empty wk dir
 
-
+alias pu="git push"
 
 #this is for strings
 P="AAA"
