@@ -94,7 +94,9 @@ function ca(){
 	git commit $* --amend
 }
 function cam(){
-	git commit $* -m --amend
+	read "msg?msg: " 
+	read "files?files: " 
+	git commit $files -m $msg --amend	
 }
 	
 alias s="git status"
@@ -150,6 +152,13 @@ function sr(){
 	source ~/.zshrc
 }
 
+function gh(){
+	echo "ut = untracked\n" 
+	echo "tr = tracked\n" 
+	echo "id = index\n" 
+	echo "co = commited\n" 
+	echo "add s to show status\n"
+}
 function check_show(){
 	if [[ $# == 1 && $1 == "s" ]]; then
 		s
