@@ -1,20 +1,31 @@
 export PATH=$HOME/.toolbox/bin:$PATH
 export PATH="/usr/local/opt/ruby@2.5/bin:$PATH"
 
+#new terminal
+function new(){
+	session="Website"
+	tmux new -s $session -n main
+	tmux send-keys -t 'Main' 'zsh' C-m 'clear' C-m
+	
+	tmux attach-session -t $SESSION:0
+}
+
 #path related stuff
 alias ..="cd .."
 alias ...="cd ../.."
-alias ....="cd ../../../"
 
-function mk.. (){
-	..
-	mkdir $1
-	cd $1
+function cd..(){
+	cd ../$1
 }
 function mk (){
 	mkdir $1
 	cd $1
 }
+function mk.. (){
+	mkdir ../$1
+	cd ../$1
+}
+
 
 alias rm="rm -rf"
 
@@ -26,7 +37,7 @@ function gcl(){
 	check_show $*
 }
 
-#removes from index, it is removed from wking dir too
+#removes everything in git from index, it is removed from wking dir too
 function grm(){
 	git rm $* -r -f
 }
@@ -35,7 +46,7 @@ function grm.(){
 	git rm . -r -f
 }
 
-#removes from index, still in wking dir 
+#removes everything in git from cached, still in wking dir 
 function grmc (){
 	git rm --cached $* -r -f
 }
@@ -50,26 +61,53 @@ alias llll="git log -3 --oneline" #last log
 alias lo="git log --oneline"	
 alias lr="git log --reverse"	
 
-alias d="git diff"
+alias d="git diff"  #compare wk dir to index
 alias ds="git diff --staged" # compare stage to head
-alias dw="git diff HEAD" $ #compare working dir to head
-alias du=""
+alias dsu="git diff HEAD" $ #compare staged and unstaged changes
+#unstaged changes only
+function du(){
+	B=hsjfhaldsf
+	current=$(git rev-parse --abbrev-ref HEAD)
+	st  >/dev/null
+	git checkout -q -b $B >/dev/null
+	sta >/dev/null
+	cm "temp commit" >/dev/null
+	git revert HEAD^ --no-edit >/dev/null
+	au >/dev/null
+	ds
+	rth HEAD >/dev/null
+	git checkout -q $current >/dev/null 
+	sta >/dev/null
+	br -D $B >/dev/null
+}
+alias dut="echo -e 'a\n*\nq\n'|git add -i >/dev/null && echo 'untracked files added'" #compare to untracked only
 
-alias a="git add" 
+function a(){
+	git add $*
+}
+alias a.="git add ." #adds everything 
+
 alias a.c="git add . && git commit"
 alias a.cm="git add . && git commit -m"
-alias au="git add -u" #only adds tracked
+
 alias ap="git add --patch" #use patch
-alias a.="git add ." #adds everything 
 alias ap.="git add --patch ." #adds everything and use patch
-alias au="echo -e 'a\n*\nq\n'|git add -i >/dev/null && echo 'untracked files added'" #add untracked
+
+alias au="git add -u" #add tracked only
+alias aut="echo -e 'a\n*\nq\n'|git add -i >/dev/null && echo 'untracked files added'" #add untracked only
 
 alias cl="git clean -xdf" #this discards untracked files
+
 alias m="git merge"
 
-alias ch="git checkout"
+function ch(){
+	git checkout $*
+}
 alias ch.="git checkout ."
-alias chb="git checkout -b"
+function chb(){
+	git checkout -b $* 
+}
+
 alias cht="git checkout --theirs"
 alias cho="git checkout --ours"
 function ch.t (){
@@ -157,7 +195,7 @@ function gh(){
 	echo "tr = tracked\n" 
 	echo "id = index\n" 
 	echo "co = commited\n" 
-	echo "add s to show status\n"
+	echo "s = status, all = execute all\n"
 }
 function check_show(){
 	if [[ $# == 1 && $1 == "s" ]]; then
@@ -166,30 +204,41 @@ function check_show(){
 }
 #create some changes that are untracked
 function ut(){
-	echo "hi" >> untracked.txt
+	echo "untracked" >> untracked.txt
 	check_show $*
 }
 #create some changes that are modified
 function tr(){
-	echo "hi" >> tracked.txt
+	echo "tracked" >> tracked.txt
 	a tracked.txt	
 	git commit tracked.txt -m "commit tracked" -q
-	echo "hi" >> tracked.txt
+	echo "tracked" >> tracked.txt
 	check_show $*
 }
 #create some changes that are in index
 function id(){
-	echo "hi" >> index.txt
+	echo "index" >> index.txt
 	a index.txt	
 	check_show $*
 }
 #create some changes that are commited
 function co(){
-	echo "hi" >> commited.txt
+	echo "commited" >> commited.txt
 	a commited.txt
 	git commit commited.txt -m "new commit"
 	check_show $*
 }
-
+function restart(){
+	gcl
+	clear
+	all
+}
+function all(){
+	ut
+	tr 
+	id 
+	co
+	s
+}
 
 
