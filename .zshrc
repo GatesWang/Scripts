@@ -1,6 +1,10 @@
 export PATH=$HOME/.toolbox/bin:$PATH
 export PATH="/usr/local/opt/ruby@2.5/bin:$PATH"
 
+function openI(){
+	open -a "IntelliJ IDEA" $*
+}
+
 #new terminal
 function new(){
 	session="Website"
@@ -86,7 +90,7 @@ function a(){
 	git add $*
 }
 alias a.="git add ." #adds everything 
-
+alias ai="git add -i"
 alias a.c="git add . && git commit"
 alias a.cm="git add . && git commit -m"
 
