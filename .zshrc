@@ -34,6 +34,12 @@ function mk.. (){
 alias rm="rm -rf"
 
 #git related stuff
+function gls(){
+	git ls-files $*
+}
+alias glsd="gls --deleted"
+alias glsm="gls --modified"
+
 function gcl(){
  	grm.
  	cm "removed everything"
@@ -68,23 +74,7 @@ alias lr="git log --reverse"
 alias d="git diff"  #compare wk dir to index
 alias ds="git diff --staged" # compare stage to head
 alias dsu="git diff HEAD" $ #compare staged and unstaged changes
-#unstaged changes only
-function du(){
-	B=hsjfhaldsf
-	current=$(git rev-parse --abbrev-ref HEAD)
-	st  >/dev/null
-	git checkout -q -b $B >/dev/null
-	sta >/dev/null
-	cm "temp commit" >/dev/null
-	git revert HEAD^ --no-edit >/dev/null
-	au >/dev/null
-	ds
-	rth HEAD >/dev/null
-	git checkout -q $current >/dev/null 
-	sta >/dev/null
-	br -D $B >/dev/null
-}
-alias dut="echo -e 'a\n*\nq\n'|git add -i >/dev/null && echo 'untracked files added'" #compare to untracked only
+
 
 function a(){
 	git add $*
@@ -97,7 +87,7 @@ alias a.cm="git add . && git commit -m"
 alias ap="git add --patch" #use patch
 alias ap.="git add --patch ." #adds everything and use patch
 
-alias au="git add -u" #add tracked only
+alias at="git add -u" #add tracked only
 alias aut="echo -e 'a\n*\nq\n'|git add -i >/dev/null && echo 'untracked files added'" #add untracked only
 
 alias cl="git clean -xdf" #this discards untracked files
@@ -112,12 +102,16 @@ function chb(){
 	git checkout -b $* 
 }
 
-alias cht="git checkout --theirs"
-alias cho="git checkout --ours"
-function ch.t (){
+function cht (){
 	git checkout --theirs $* .
 }
-function ch.o (){
+function cho (){
+	git checkout --ours $* .
+}
+function cht. (){
+	git checkout --theirs $* .
+}
+function cho. (){
 	git checkout --ours $* .
 }
 
@@ -135,6 +129,10 @@ function cm(){
 function ca(){
 	git commit $* --amend
 }
+function camne(){
+	read "files?files: " 
+	git commit $files --no-edit --amend	
+}
 function cam(){
 	read "msg?msg: " 
 	read "files?files: " 
@@ -146,7 +144,9 @@ alias sp="git status --porcelain"
 
 alias res="git restore --staged" #clears staging area
 alias res.="git restore --staged ." #clears staging area for everything
+alias re="git restore" #
 alias re.="git restore ." #this is for clearing the working directory, this discards local changes
+
 
 alias st="git stash"
 alias sta="git stash apply"
@@ -169,6 +169,9 @@ P="AAA"
 #this is for brazil
 alias bbr="brazil-build release"
 alias bb="brazil-build"
+
+#this is for gk
+alias gkf=gk-fix-mv-conflicts
 
 #this is for cr
 alias cr="cr -o"
