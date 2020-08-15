@@ -5,15 +5,6 @@ function openI(){
 	open -a "IntelliJ IDEA" $*
 }
 
-#new terminal
-function new(){
-	session="Website"
-	tmux new -s $session -n main
-	tmux send-keys -t 'Main' 'zsh' C-m 'clear' C-m
-	
-	tmux attach-session -t $SESSION:0
-}
-
 #path related stuff
 alias ..="cd .."
 alias ...="cd ../.."
